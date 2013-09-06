@@ -7,6 +7,8 @@
   "ram":              1024,
   "hostname":         "example.dev",
   "ssh_port":         2222,
+  "ssh_username":     "my_user",
+  "sync_folder":      "/my_project",
 
   // Custom bootstrap, relative to the location of this file.
   // This should only set bash preferences!

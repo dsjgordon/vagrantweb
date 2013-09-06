@@ -1,17 +1,34 @@
 # TODO: Move everything into /vagrant.  Only need /puppet on a project with a production infrastructure
 # TODO: Commit roles to a boilerplate project and remove
-# TODO: Allow user to be specified in staging
+# TODO: Allow user to be specified in VM_CONFIG
+# TODO: Configure .gitconfig
+# TODO: Configure nameserver
+# TODO: Configure gateway
+# TODO: Configure default user
+# TODO: Configure mount folder
 
 VAGRANTFILE_API_VERSION = "2"
 require 'JSON'
 
 PROJECT = "lamp"
-STAGING = {}
 
-# Load staging
-if File.exists?('vagrant/staging.json')
-  File.open('vagrant/staging.json', 'r') do |f|
-    STAGING = JSON.load(f)
+# Default VM Config.
+# Copy example-config.json to config.json to override.
+VM_CONFIG = {
+  "vm_name"         => PROJECT,
+  "ram"             => false,
+  "hostname"        => false,
+  "ssh_port"        => 2222,
+  "bootstrap"       => false,
+  "bridged_adapter" => false,
+  "ip"              => false,
+  "host_port"       => 8080
+}
+
+# Load optional config
+if File.exists?('vagrant/config.json')
+  File.open('vagrant/config.json', 'r') do |f|
+    VM_CONFIG.merge(JSON.load(f))
   end
 end
 
@@ -21,38 +38,32 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box"
 
   # Port forwarding
-  if STAGING['host_port']
-    config.vm.network :forwarded_port, guest: 80, host: STAGING['host_port']
-  elsif !STAGING['bridged_adapter']
-    config.vm.network :forwarded_port, guest: 80, host: 8080
+  if VM_CONFIG['host_port']
+    config.vm.network :forwarded_port, guest: 80, host: VM_CONFIG['host_port']
   end
 
   # Set hostname
-  if STAGING['hostname']
-    config.vm.hostname = STAGING['hostname']
+  if VM_CONFIG['hostname']
+    config.vm.hostname = VM_CONFIG['hostname']
   end
 
   # Ensure consistent SSH ports
-  config.ssh.port = 2222
+  config.ssh.port = VM_CONFIG['ssh_port']
 
   # Virtualbox configuration
   config.vm.provider "virtualbox" do |vb|
     # VM Name
-    if STAGING['vm_name']
-      vb.name = STAGING['vm_name']
-    else
-      vb.name = PROJECT
-    end
+    vb.name = VM_CONFIG['vm_name']
 
     # Memory
-    if STAGING['ram']
-      vb.customize ["modifyvm", :id, "--memory", STAGING['ram']]
+    if VM_CONFIG['ram']
+      vb.customize ["modifyvm", :id, "--memory", VM_CONFIG['ram']]
     end
 
     # Add bridged adaptor for network ip
-    if STAGING['bridged_adapter']
+    if VM_CONFIG['bridged_adapter']
       vb.customize ["modifyvm", :id, "--nic2", "bridged"]
-      vb.customize ["modifyvm", :id, "--bridgeadapter2", STAGING['bridged_adapter']]
+      vb.customize ["modifyvm", :id, "--bridgeadapter2", VM_CONFIG['bridged_adapter']]
     end
   end
 
@@ -65,21 +76,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.module_path = "puppet/modules"
     puppet.manifest_file  = "dev.pp"
 
-    if STAGING.length
-      puppet.facter = {
-        "dev_hostname"    => STAGING["hostname"],
-        "dev_ip"          => STAGING["ip"],
-        "dev_gateway"     => STAGING["gateway"],
-        "dev_nameserver"  => STAGING["nameserver"],
-        "dev_name"        => STAGING["name"],
-        "dev_email"       => STAGING["email"],
-        "dev_editor"      => STAGING["editor"]
-      }
+    # Import vm config into puppet facts
+    puppet.factor = {}
+    VM_CONFIG.each_pair do |key, value|
+      puppet.facter["dev_#{key}"] = value
     end
   end
 
   # Run developer bootstrap
-  if STAGING['bootstrap']
-    config.vm.provision :shell, :path => "vagrant/#{STAGING['bootstrap']}"
+  if VM_CONFIG['bootstrap']
+    config.vm.provision :shell, :path => "vagrant/#{VM_CONFIG['bootstrap']}"
   end
 end

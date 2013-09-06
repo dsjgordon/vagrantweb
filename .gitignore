@@ -1,2 +1,3 @@
 .vagrant
-staging.json
+vagrant/config.json
+vagrant/bootstrap.sh

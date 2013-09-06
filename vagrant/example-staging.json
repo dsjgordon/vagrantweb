@@ -1,10 +1,19 @@
+// Example VM config.
+// Copy this file to config.json to use the values when providing and provisioning
+// the Vagrant VM.  All settings are optional and should be fairly self explanatory.
 {
-  // "bootstrap": "vagrant/bootstrap.sh",
-  "hostname": "darren.tom.dev",
-  "ip": "172.16.5.35",
-  "gateway": "172.16.0.254",
-  "nameserver": "172.16.4.2",
-  "name": "Darren Gordon",
-  "email": "dgordon@timesofmalta.com",
-  "editor": "nano"
+  // VM Settings
+  "vm_name":          "my_box",
+  "ram":              1024,
+  "hostname":         "example.dev",
+  "ssh_port":         2222,
+
+  // Custom bootstrap, relative to the location of this file.
+  // This should only set bash preferences!
+  "bootstrap":        "bootstrap.sh",
+
+  // Bridged networking
+  "bridged_adapter":  "<name as shown in VirtualBox>",
+  "ip":               "<lan ip>",
+  "host_port":        false
 }

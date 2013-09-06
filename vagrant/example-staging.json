@@ -1,0 +1,10 @@
+{
+  // "bootstrap": "vagrant/bootstrap.sh",
+  "hostname": "darren.tom.dev",
+  "ip": "172.16.5.35",
+  "gateway": "172.16.0.254",
+  "nameserver": "172.16.4.2",
+  "name": "Darren Gordon",
+  "email": "dgordon@timesofmalta.com",
+  "editor": "nano"
+}

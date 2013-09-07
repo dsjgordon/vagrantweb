@@ -23,7 +23,12 @@ if $dev_bridged_adapter {
   }
 }
 
-class { 'features::www':}
+# WWW
+class { 'features::www':
+  domain  => $dev_hostname,
+  docroot => $dev_sync_folder
+}
+
 class { 'features::mysql': }
 class { 'features::solr': }
 class { 'features::memcache': }

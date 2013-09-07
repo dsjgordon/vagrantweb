@@ -5,7 +5,7 @@
   // VM Settings
   "vm_name":          "my_box",
   "ram":              1024,
-  "hostname":         "example.dev",
+  "hostname":         "foo.example.dev",
   "ssh_port":         2222,
   "ssh_username":     "my_user",
   "sync_folder":      "/my_project",

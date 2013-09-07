@@ -35,6 +35,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   if dev_config['sync_folder']
     config.vm.synced_folder '.', dev_config['sync_folder']
+  else
+    dev_config['sync_folder'] = '/vagrant'
   end
   
   # Port forwarding

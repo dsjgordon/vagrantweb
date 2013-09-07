@@ -1,5 +1,3 @@
-# TODO: Move everything into /vagrant.  Only need /puppet on a project with a production infrastructure
-# TODO: Confirm how roles and features work in the boilerplate project
 # TODO: Configure .gitconfig
 
 VAGRANTFILE_API_VERSION = '2'

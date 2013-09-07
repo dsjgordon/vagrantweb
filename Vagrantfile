@@ -16,7 +16,10 @@ dev_config = {
   'bootstrap'       => false,
   'bridged_adapter' => false,
   'ip'              => false,
-  'host_port'       => 8080
+  'host_port'       => 8080,
+  'name'			=> 'developer',
+  'email'			=> 'dev@example.com',
+  'editor'			=> 'vi'
 }
 
 # Load optional config

@@ -2,20 +2,25 @@
 // Copy this file to config.json to use the values when providing and provisioning
 // the Vagrant VM.  All settings are optional and should be fairly self explanatory.
 {
-  // VM Settings
-  "vm_name":          "my_box",
-  "ram":              1024,
-  "hostname":         "foo.example.dev",
-  "ssh_port":         2222,
-  "ssh_username":     "my_user",
-  "sync_folder":      "/my_project",
+	// VM Settings
+	"vm_name":			"my_box",
+	"ram":				1024,
+	"hostname":			"foo.example.dev",
+	"ssh_port":			2222,
+	"ssh_username":		"my_user",
+	"sync_folder":		"/my_project",
 
-  // Custom bootstrap, relative to the location of this file.
-  // This should only set bash preferences!
-  "bootstrap":        "bootstrap.sh",
+	// Custom bootstrap, relative to the location of this file.
+	// This should only set bash preferences!
+	"bootstrap":		"bootstrap.sh",
 
-  // Bridged networking
-  "bridged_adapter":  "<name as shown in VirtualBox>",
-  "ip":               "<lan ip>",
-  "host_port":        false
+	// Bridged networking
+	"bridged_adapter":	"<name as shown in VirtualBox>",
+	"ip":				"<lan ip>",
+	"host_port":		false,
+	
+	// Git
+	"name":				"<your name>",
+	"email":			"<your email>",
+	"editor":			"nano"
 }

@@ -24,14 +24,18 @@ if $dev_bridged_adapter {
 }
 
 # WWW
-class { 'features::www':
+class { 'features::features_www':
   domain  => $dev_hostname,
   docroot => $dev_sync_folder
 }
 
-class { 'features::mysql': }
-class { 'features::solr': }
-class { 'features::memcache': }
-class { 'features::git': }
-class { 'features::minify': }
-class { 'features::phptest': }
+# Git
+class { 'features::features_git':
+	name		=> $dev_name,
+	email		=> $dev_email,
+	editor		=> $dev_editor
+}
+
+class { 'features::features_mysql': }
+class { 'features::features_memcache': }
+class { 'features::features_phptest': }

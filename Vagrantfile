@@ -77,9 +77,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.manifest_file  = 'dev.pp'
 
     # Import vm config into puppet facts
-    puppet.factor = {}
     dev_config.each_pair do |key, value|
-      puppet.factor["dev_#{key}"] = value
+      puppet.facter["dev_#{key}"] = value
     end
   end
 

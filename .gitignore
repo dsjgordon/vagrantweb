@@ -2,3 +2,4 @@
 .vagrant
 vagrant/config.json
 vagrant/bootstrap.sh
+phpinfo.php

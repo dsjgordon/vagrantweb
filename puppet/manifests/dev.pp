@@ -29,6 +29,10 @@ class { 'features::features_www':
 	docroot => $dev_sync_folder
 }
 
+file { "${dev_sync_folder}/phpinfo.php":
+	content	=> "<?php\nphpinfo();"
+}
+
 # Git
 class { 'features::features_git':
 	name		=> $dev_name,

@@ -68,9 +68,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		end
 	end
 
-	# Install Librarian-puppet to manage third party modules
-	config.vm.provision :shell, :path => 'vagrant/librarian-puppet.sh'
-
 	# Provision with puppet
 	config.vm.provision :puppet do |puppet|
 		puppet.manifests_path = 'puppet/manifests'

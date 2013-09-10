@@ -1,7 +1,9 @@
 class features::features_www (
 	$domain,
-	$docroot
+	$docroot,
+	$debug = false
 ) {
+	# Apache
 	class { 'apache':
 		default_vhost	=> false,
 		mpm_module		=> prefork
@@ -20,8 +22,19 @@ class features::features_www (
 		override		=> 'All'
 	}
 
+	# PHP
 	class { 'php':
 		noop => true
+	}
+
+	php::module { [ 'curl', 'memcache', 'mysql' ]: }
+	
+	php::module { 'apc':
+		module_prefix	=> 'php-'
+	}
+	
+	if $debug {
+		php::module { 'xdebug': }
 	}
 
 	php::ini { 'php':

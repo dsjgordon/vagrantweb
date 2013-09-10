@@ -27,7 +27,8 @@ class vagrant_dev {
 	# PHP frontend
 	class { 'features::features_www':
 		domain  => $dev_hostname,
-		docroot => $dev_sync_folder
+		docroot => $dev_sync_folder,
+		debug	=> true
 	}
 	file { "${dev_sync_folder}/phpinfo.php":
 		content	=> "<?php\nphpinfo();"

@@ -1,12 +1,10 @@
 VAGRANTFILE_API_VERSION = '2'
 require 'JSON'
 
-PROJECT = 'lamp'
-
 # Default VM Config.
 # Copy example-config.json to config.json to override.
 dev_config = {
-	'vm_name'			=> PROJECT,
+	'vm_name'			=> 'vagrant',
 	'ram'				=> false,
 	'hostname'			=> false,
 	'ssh_port'			=> 2222,

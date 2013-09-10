@@ -34,6 +34,9 @@ class vagrant_dev {
 		content	=> "<?php\nphpinfo();"
 	}
 	
+	# Mysql
+	class { 'features::features_mysql':	}
+	
 	# Git
 	class { 'features::features_git':
 		name		=> $dev_name,
@@ -43,10 +46,10 @@ class vagrant_dev {
 	
 	# Build tools
 	package { 'build-essential':
-		ensure => 'installed',
+		ensure => 'installed'
 	}
-  
-	class { 'features::features_mysql': }
+
+	# TODO:
 	class { 'features::features_memcache': }
 	class { 'features::features_phptest': }
 }

@@ -27,6 +27,10 @@ class features::features_www (
 		noop => true
 	}
 
+	package { 'curl':
+		ensure => 'installed'
+	}
+
 	php::module { [ 'curl', 'memcache', 'mysql' ]: }
 	
 	php::module { 'apc':

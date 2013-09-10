@@ -24,12 +24,11 @@ class vagrant_dev {
 		}
 	}
 	
-	# WWW
+	# PHP frontend
 	class { 'features::features_www':
 		domain  => $dev_hostname,
 		docroot => $dev_sync_folder
 	}
-	
 	file { "${dev_sync_folder}/phpinfo.php":
 		content	=> "<?php\nphpinfo();"
 	}
@@ -41,6 +40,11 @@ class vagrant_dev {
 		editor		=> $dev_editor
 	}
 	
+	# Build tools
+	package { 'build-essential':
+		ensure => 'installed',
+	}
+  
 	class { 'features::features_mysql': }
 	class { 'features::features_memcache': }
 	class { 'features::features_phptest': }

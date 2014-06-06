@@ -6,7 +6,7 @@ Usage
     $ git submodule update
     $ cp vagrant/example-config.json vagrant/config.json
 
-Update config.json to suit your needs.th the 
+Update config.json to suit your needs.
 
     $ vagrantup
 
@@ -14,7 +14,7 @@ Abstract
 ========
 This is a boilerplate project to provide some convenient idioms for describing a
 project's dependencies with puppet, and allowing developers to run the project with 
-the above process.
+the above process using vagrant.
 
 git submodules are used to ensure that puppet and dependencies required by the
 puppet manifests are included before attempting to up the VM with vagrant.

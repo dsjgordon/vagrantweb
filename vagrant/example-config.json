@@ -11,7 +11,8 @@
 	"sync_folder":		"/my_project",
 
 	// Custom bootstrap, relative to the location of this file.
-	// This should only set bash preferences!
+	// This should only set personal bash preferences, not anything the project
+	// depends upon!
 	"bootstrap":		"bootstrap.sh",
 
 	// Bridged networking

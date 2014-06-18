@@ -1,5 +1,8 @@
 .project
+.buildpath
+.settings/
 .vagrant
 vagrant/config.json
 vagrant/bootstrap.sh
 phpinfo.php
+todo/

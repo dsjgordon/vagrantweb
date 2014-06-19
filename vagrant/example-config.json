@@ -2,12 +2,17 @@
 // Copy this file to config.json to use the values when providing and provisioning
 // the Vagrant VM.  All settings are optional and should be fairly self explanatory.
 {
+	// Whether to update packages on provision
+	"apt_update":		true,		// Disable after up for faster CM development
+
 	// VM Settings
 	"vm_name":			"my_box",
 	"ram":				1024,
 	"hostname":			"foo.example.dev",
 	"ssh_port":			2222,
 	"ssh_username":		"my_user",
+	
+	// Where to sync the host project folder, defaults to /vagrant
 	"sync_folder":		"/my_project",
 
 	// Custom bootstrap, relative to the location of this file.

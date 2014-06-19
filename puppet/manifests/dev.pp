@@ -1,11 +1,3 @@
-# Custom facts:
-#
-# $dev_vm_name
-# $dev_hostname
-# $dev_sync_folder
-# $dev_bridged_adapter
-# $dev_ip
-
 class vagrant_dev {
 	# Set network interface
 	if $dev_bridged_adapter {
@@ -55,9 +47,14 @@ class vagrant_dev {
 }
 
 # Ensure apt is up to date, then run
-exec { 'apt-get update':
-	path	=> [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ],
-	command	=> 'apt-get -q -y update',
+if $dev_apt_update and "false" != $dev_apt_update {
+	exec { 'apt-get update':
+		path	=> [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ],
+		command	=> 'apt-get -q -y update',
+	}
+	->
+	class { 'vagrant_dev': }
 }
-->
-class { 'vagrant_dev': }
+else {
+	class { 'vagrant_dev': }
+}

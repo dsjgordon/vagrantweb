@@ -15,7 +15,8 @@ dev_config = {
 	'host_port'			=> 8080,
 	'name'				=> 'developer',
 	'email'				=> 'dev@example.com',
-	'editor'			=> 'vi'
+	'editor'			=> 'vi',
+	'apt_update'		=> true
 }
 
 # Load optional config

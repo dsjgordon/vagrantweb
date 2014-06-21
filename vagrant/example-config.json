@@ -2,16 +2,12 @@
 // Copy this file to config.json to use the values when providing and provisioning
 // the Vagrant VM.  All settings are optional and should be fairly self explanatory.
 {
-    // Application environment
-    "app_environment":  "development",
-
     // Whether to update packages on provision
     "apt_update":       true,        // Disable after up for faster CM development
 
     // VM Settings
     "vm_name":          "my_box",
     "ram":              1024,
-    "hostname":         "foo.example.dev",
     "ssh_port":         2222,
     "ssh_username":     "my_user",
     
@@ -31,6 +27,20 @@
     // Ports to forward.  Set to empty hash to forward none.
     "forward_ports":    { 80: 8080 },
 
+    // Git
+    "name":             "<your name>",
+    "email":            "<your email>",
+    "editor":           "nano",
+    
+    // App settings
+    // These settings may be applicable in a non vagrant environment
+    
+    // Hostname
+    "hostname":         "foo.example.dev",
+    
+    // Application environment
+    "app_environment":  "development", 
+    
     // MySQL
     "db_host":          "localhost",
     "db_port":          "3306",
@@ -38,8 +48,7 @@
     "db_username":      "root",
     "db_password":      "",
     
-    // Git
-    "name":             "<your name>",
-    "email":            "<your email>",
-    "editor":           "nano"
+    // Memcache
+    "memcache_host":    "localhost",
+    "memcache_port":    "11211"
 }

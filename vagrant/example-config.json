@@ -24,10 +24,13 @@
     "bootstrap":        "bootstrap.sh",
 
     // Bridged networking
+    // Skip to use host only
     "bridged_adapter":  "<name as shown in VirtualBox>",
     "ip":               "<lan ip>",
-    "host_port":        false,
     
+    // Ports to forward.  Set to empty hash to forward none.
+    "forward_ports":    { 80: 8080 },
+
     // MySQL
     "db_host":          "localhost",
     "db_port":          "3306",

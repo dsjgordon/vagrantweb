@@ -12,7 +12,7 @@ dev_config = {
     'bootstrap'         => false,
     'bridged_adapter'   => false,
     'ip'                => false,
-    'host_port'         => 8080,
+    'forward_ports'     => { 80 => 8080 },
     'app_environment'   => 'development',
     'name'              => 'developer',
     'email'             => 'dev@example.com',
@@ -46,8 +46,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     # Port forwarding
-    if dev_config['host_port']
-        config.vm.network :forwarded_port, guest: 80, host: dev_config['host_port']
+    if dev_config['forward_ports']
+        dev_config['forward_ports'].each_pair do |guest_port, host_port|
+            config.vm.network :forwarded_port, guest: guest_port, host: host_port
+        end
     end
 
     # Set hostname

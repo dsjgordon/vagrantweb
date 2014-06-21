@@ -20,12 +20,13 @@ class vagrant_dev {
     class { 'features::features_www':
         domain          => $dev_hostname,
         docroot         => $dev_sync_folder,
-        debug           => true,
         server_admin    => $dev_email,
         env             => "APP_ENVIRONMENT ${dev_app_environment}"
     }
-    file { "${dev_sync_folder}/phpinfo.php":
-        content => '<?php\nphpinfo();'
+    
+    class { 'features::features_php':
+        debug   => true,
+        docroot => $dev_sync_folder
     }
     
     # Mysql

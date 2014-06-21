@@ -1,7 +1,6 @@
 class features::features_www (
     $domain,
     $docroot,
-    $debug = false,
     $pin_version = false,
     $server_admin = undef,
     $env = []
@@ -38,9 +37,6 @@ class features::features_www (
         package_ensure  => $package_ensure
     }
 
-    include apache::mod::rewrite
-    include apache::mod::php
-
     define features::vhost (
         $ssl
     ) {
@@ -69,37 +65,5 @@ class features::features_www (
     }
     features::vhost { "www.${domain}-ssl":
         ssl => true
-    }
-
-    # PHP
-    class { 'php':
-        noop => true
-    }
-
-    package { 'curl':
-        ensure => 'installed'
-    }
-
-    php::module { [ 'curl', 'memcache', 'mysql' ]: }
-    
-    php::module { 'apc':
-        module_prefix => 'php-'
-    }
-    
-    if $debug {
-        php::module { 'xdebug': }
-    }
-
-    php::ini { 'php':
-        value   => [
-            'display_errors = "On"',
-            'log_errors = "On"',
-            'error_reporting = E_ALL',
-            'include_path = ".:/usr/share/php:./includes:/var/www/includes"',
-            'date.timezone = "UTC"',
-            'upload_max_filesize = 64M'
-        ],
-        target  => 'php.ini',
-        notify  => Class['apache']
     }
 }

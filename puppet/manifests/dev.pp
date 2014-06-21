@@ -21,7 +21,14 @@ class vagrant_dev {
         domain          => $dev_hostname,
         docroot         => $dev_sync_folder,
         server_admin    => $dev_email,
-        env             => "APP_ENVIRONMENT ${dev_app_environment}"
+        env             => [
+            "APP_ENVIRONMENT ${dev_app_environment}",
+            "APP_DB_HOST ${dev_db_host}",
+            "APP_DB_PORT ${dev_db_port}",
+            "APP_DB_USERNAME ${dev_db_username}",
+            "APP_DB_PASSWORD ${dev_db_password}",
+            "APP_DB_NAME ${dev_db_name}"
+        ]
     }
     
     class { 'features::features_php':
@@ -30,7 +37,12 @@ class vagrant_dev {
     }
     
     # Mysql
-    class { 'features::features_mysql': }
+    class { 'features::features_mysql':
+        port        => $dev_db_port,
+        username    => $dev_db_username,
+        password    => $dev_db_password,
+        database    => $dev_db_name
+    }
     
     # Git
     class { 'features::features_git':

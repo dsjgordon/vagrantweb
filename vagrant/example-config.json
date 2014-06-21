@@ -2,34 +2,34 @@
 // Copy this file to config.json to use the values when providing and provisioning
 // the Vagrant VM.  All settings are optional and should be fairly self explanatory.
 {
-	// Application environment
-	"app_environment":	"development",
+    // Application environment
+    "app_environment":  "development",
 
-	// Whether to update packages on provision
-	"apt_update":		true,		// Disable after up for faster CM development
+    // Whether to update packages on provision
+    "apt_update":       true,        // Disable after up for faster CM development
 
-	// VM Settings
-	"vm_name":			"my_box",
-	"ram":				1024,
-	"hostname":			"foo.example.dev",
-	"ssh_port":			2222,
-	"ssh_username":		"my_user",
-	
-	// Where to sync the host project folder, defaults to /vagrant
-	"sync_folder":		"/my_project",
+    // VM Settings
+    "vm_name":          "my_box",
+    "ram":              1024,
+    "hostname":         "foo.example.dev",
+    "ssh_port":         2222,
+    "ssh_username":     "my_user",
+    
+    // Where to sync the host project folder, defaults to /vagrant
+    "sync_folder":      "/my_project",
 
-	// Custom bootstrap, relative to the location of this file.
-	// This should only set personal bash preferences, not anything the project
-	// depends upon!
-	"bootstrap":		"bootstrap.sh",
+    // Custom bootstrap, relative to the location of this file.
+    // This should only set personal bash preferences, not anything the project
+    // depends upon!
+    "bootstrap":        "bootstrap.sh",
 
-	// Bridged networking
-	"bridged_adapter":	"<name as shown in VirtualBox>",
-	"ip":				"<lan ip>",
-	"host_port":		false,
-	
-	// Git
-	"name":				"<your name>",
-	"email":			"<your email>",
-	"editor":			"nano"
+    // Bridged networking
+    "bridged_adapter":  "<name as shown in VirtualBox>",
+    "ip":               "<lan ip>",
+    "host_port":        false,
+    
+    // Git
+    "name":             "<your name>",
+    "email":            "<your email>",
+    "editor":           "nano"
 }

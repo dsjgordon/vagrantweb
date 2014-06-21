@@ -1,25 +1,74 @@
 class features::features_www (
 	$domain,
 	$docroot,
-	$debug = false
+	$debug = false,
+	$pin_version = false,
+	$server_admin = undef,
+	$env = []
 ) {
+	# Pin package version if specified
+	if !$pin_version or $pin_version == 'false' {
+		$package_ensure = 'present'
+	} else {
+		$package_ensure = $pin_version
+	}
+	
 	# Apache
+	# Prefork MPM is needed for php
 	class { 'apache':
 		default_vhost	=> false,
-		mpm_module		=> prefork
+		mpm_module		=> prefork,
+		default_mods	=>   [
+			'alias',
+			'auth_basic',
+			'authn_default',
+			'authz_default',
+			'authz_groupfile',
+			'authz_user',
+			'deflate',
+			'dir',
+			'env',
+			'mime',
+			'negotiation',
+			'reqtimeout',
+			'rewrite',
+			'setenvif'
+		],
+		serveradmin		=> $server_admin,
+		package_ensure	=> $package_ensure
 	}
 
 	include apache::mod::rewrite
 	include apache::mod::php
 
-	apache::vhost { "www.${domain}":
-		vhost_name		=> '*',
-		port			=> '80',
-		docroot			=> $docroot,
-		servername		=> $domain,
-		docroot_group	=> 'www-data',
-		docroot_owner	=> 'www-data',
-		override		=> 'All'
+	define features::vhost (
+		$ssl
+	) {
+		if !$ssl {
+			$port = '80'
+		} else {
+			$port = '443'
+		}
+
+		apache::vhost { $name:
+			vhost_name		=> '*',
+			port			=> $port,
+			ssl				=> $ssl,
+			docroot			=> $features::features_www::docroot,
+			directories		=> {
+				path	=> $features::features_www::docroot,
+				options	=> ['FollowSymLinks'] 
+			},
+			servername		=> $features::features_www::domain,
+			override		=> 'All',
+			setenv			=> $features::features_www::env
+		}
+	}
+	features::vhost { "www.${domain}":
+		ssl	=> false
+	}
+	features::vhost { "www.${domain}-ssl":
+		ssl => true
 	}
 
 	# PHP

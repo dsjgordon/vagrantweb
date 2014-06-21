@@ -13,6 +13,7 @@ dev_config = {
 	'bridged_adapter'	=> false,
 	'ip'				=> false,
 	'host_port'			=> 8080,
+	'app_environment'	=> 'development',
 	'name'				=> 'developer',
 	'email'				=> 'dev@example.com',
 	'editor'			=> 'vi',
@@ -77,6 +78,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		dev_config.each_pair do |key, value|
 			puppet.facter["dev_#{key}"] = value
 		end
+		
+		puppet.facter["fqdn"] = dev_config['hostname']
 	end
 
 	# Run developer bootstrap

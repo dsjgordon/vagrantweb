@@ -22,7 +22,9 @@ dev_config = {
     'db_port'           => '3306',
     'db_name'           => 'app',
     'db_username'       => 'root',
-    'db_password'       => 'root'
+    'db_password'       => 'root',
+    'memcache_host'     => 'localhost',
+    'memcache_port'     => '11211'
 }
 
 # Load optional config

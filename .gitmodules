@@ -31,3 +31,6 @@
 [submodule "puppet/modules/mysql"]
 	path = puppet/modules/mysql
 	url = https://github.com/example42/puppet-mysql.git
+[submodule "puppet/modules/memcached"]
+	path = puppet/modules/memcached
+	url = https://github.com/saz/puppet-memcached.git

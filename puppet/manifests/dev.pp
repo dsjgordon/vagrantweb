@@ -1,5 +1,5 @@
 class vagrant_dev {
-    # Set network interface
+    # Vagrant infrastructure
     if $dev_bridged_adapter {
         if $dev_ip {
             network_config { 'eth1':
@@ -16,7 +16,7 @@ class vagrant_dev {
         }
     }
     
-    # PHP frontend
+    # Apache
     class { 'features::features_www':
         domain          => $dev_hostname,
         docroot         => $dev_sync_folder,
@@ -27,10 +27,13 @@ class vagrant_dev {
             "APP_DB_PORT ${dev_db_port}",
             "APP_DB_USERNAME ${dev_db_username}",
             "APP_DB_PASSWORD ${dev_db_password}",
-            "APP_DB_NAME ${dev_db_name}"
+            "APP_DB_NAME ${dev_db_name}",
+            "APP_MEMCACHE_HOST ${dev_memcache_host}",
+            "APP_MEMCACHE_PORT ${dev_memcache_port}"
         ]
     }
     
+    # PHP
     class { 'features::features_php':
         debug   => true,
         docroot => $dev_sync_folder
@@ -42,6 +45,11 @@ class vagrant_dev {
         username    => $dev_db_username,
         password    => $dev_db_password,
         database    => $dev_db_name
+    }
+    
+    # Memcache
+    class { 'features::features_memcache':
+        port    => $dev_memcache_port
     }
     
     # Git
@@ -56,8 +64,6 @@ class vagrant_dev {
         ensure => 'installed'
     }
 
-    # TODO:
-    class { 'features::features_memcache': }
     class { 'features::features_phptest': }
 }
 

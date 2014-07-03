@@ -36,8 +36,8 @@ end
 
 # Configure VM
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    config.vm.box = 'precise64'
-    config.vm.box_url = 'http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box'
+    config.vm.box = 'saucy64'
+    config.vm.box_url = 'http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-1310-x64-virtualbox-puppet.box'
 
     if dev_config['sync_folder']
         config.vm.synced_folder './', dev_config['sync_folder'], id: "vagrant-root"

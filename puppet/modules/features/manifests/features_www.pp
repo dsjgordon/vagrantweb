@@ -20,8 +20,7 @@ class features::features_www (
         default_mods    => [
             'alias',
             'auth_basic',
-            'authn_default',
-            'authz_default',
+            'authn_core',
             'authz_groupfile',
             'authz_user',
             'deflate',

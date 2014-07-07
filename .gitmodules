@@ -34,3 +34,9 @@
 [submodule "puppet/modules/memcached"]
 	path = puppet/modules/memcached
 	url = https://github.com/saz/puppet-memcached.git
+[submodule "puppet/modules/wget"]
+	path = puppet/modules/wget
+	url = https://github.com/maestrodev/puppet-wget
+[submodule "puppet/modules/composer"]
+	path = puppet/modules/composer
+	url = https://github.com/willdurand/puppet-composer.git

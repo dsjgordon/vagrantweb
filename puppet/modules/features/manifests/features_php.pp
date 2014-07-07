@@ -46,6 +46,11 @@ class features::features_php (
         notify  => Class['apache']
     }
     
+    class { 'composer':
+        command_name    => 'composer',
+        target_dir      => '/usr/local/bin'
+    }
+
     if $docroot and $docroot != 'false' {
         file { "${docroot}/phpinfo.php":
             content => "<?php\nphpinfo();"

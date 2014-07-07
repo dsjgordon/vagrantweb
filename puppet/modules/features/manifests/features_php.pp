@@ -23,7 +23,7 @@ class features::features_php (
         ensure => 'installed'
     }
 
-    php::module { [ 'curl', 'memcache', 'mysql' ]: }
+    php::module { [ 'curl', 'memcache', 'mysql', 'json' ]: }
     
     php::module { 'apc':
         module_prefix => 'php-'

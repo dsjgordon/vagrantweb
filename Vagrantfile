@@ -60,6 +60,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Ensure consistent SSH ports
     config.ssh.port = dev_config['ssh_port']
 
+    if '2222' != dev_config['ssh_port']
+        config.vm.network :forwarded_port, guest: 22, host: 2200, id: "ssh", disabled: "true"
+        config.vm.network :forwarded_port, guest: 22, host: dev_config['ssh_port']
+    end
+
     # Virtualbox configuration
     config.vm.provider 'virtualbox' do |vb|
         # VM Name

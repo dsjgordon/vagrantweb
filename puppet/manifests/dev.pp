@@ -40,7 +40,7 @@ class vagrant_dev {
     # PHP
     class { 'features::features_php':
         debug   => true,
-        docroot => $dev_sync_folder
+        docroot => $dev_www_docroot
     }
     
     # Mysql

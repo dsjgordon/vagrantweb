@@ -16,7 +16,7 @@ class vagrant_dev {
         }
     }
     
-    if !$dev_www_docroot {
+    if !$dev_www_docroot or $dev_www_docroot == 'false' {
         $dev_www_docroot = $dev_sync_folder
     }
 

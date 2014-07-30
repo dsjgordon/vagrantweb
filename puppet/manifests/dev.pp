@@ -16,10 +16,14 @@ class vagrant_dev {
         }
     }
     
+    if !$dev_www_docroot {
+        $dev_www_docroot = $dev_sync_folder
+    }
+
     # Apache
     class { 'features::features_www':
         domain          => $dev_hostname,
-        docroot         => $dev_sync_folder,
+        docroot         => $dev_www_docroot,
         server_admin    => $dev_email,
         env             => [
             "APP_ENVIRONMENT ${dev_app_environment}",

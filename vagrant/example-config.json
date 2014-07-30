@@ -39,7 +39,10 @@
     "hostname":         "foo.example.dev",
     
     // Application environment
-    "app_environment":  "development", 
+    "app_environment":  "development",
+
+    // WWW
+    "www_docroot":      "/vagrant/www",
     
     // MySQL
     "db_host":          "localhost",

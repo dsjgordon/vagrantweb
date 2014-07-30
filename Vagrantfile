@@ -18,6 +18,7 @@ dev_config = {
     'apt_update'        => true,
     'hostname'          => false,
     'app_environment'   => 'development',
+    'www_docroot'       => false,
     'db_host'           => 'localhost',
     'db_port'           => '3306',
     'db_name'           => 'app',

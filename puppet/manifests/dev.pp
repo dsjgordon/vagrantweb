@@ -71,15 +71,4 @@ class vagrant_dev {
     class { 'features::features_phptest': }
 }
 
-# Ensure apt is up to date, then run
-if $dev_apt_update and 'false' != $dev_apt_update {
-    exec { 'apt-get update':
-        path    => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ],
-        command => 'apt-get -q -y update',
-    }
-    ->
-    class { 'vagrant_dev': }
-}
-else {
-    class { 'vagrant_dev': }
-}
+class { 'vagrant_dev': }
